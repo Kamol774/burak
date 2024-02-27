@@ -16,7 +16,16 @@ function getPositive(arr: Array<number>) {
 
 
 
+/* Project standarts
+- Logging standards
+- Naming standards
+    function, method, variable => Camel case   goHome
+    class => Pascal case                       MemberService
+    folder => Kebab case                       
+    CSS => Snake case                          button_style
+- Error handlings 
 
+    */
 
 
 

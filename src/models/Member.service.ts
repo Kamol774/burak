@@ -3,6 +3,7 @@ import MemberModel from "../schema/Member.model";
 import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/errors";
 import { MemberType } from "../libs/enum/member.enum";
+import * as bcrypt from "bcryptjs"
 
 class MemberService {
   // property
@@ -12,7 +13,7 @@ class MemberService {
     this.memberModel = MemberModel;   // memberModel ni schema dagi MemberModel iga tenglab olamz 
   }
   // promise(void) : typescript bolganligi uchun bu method hech nmaani qaytarmaslik uchun yozilgan shart
-  // agar async function bolmasa demak promise ishlatmimiz
+  // agar async function bolmasa demak promise ishlatmaymiz
   // processSignup functionini parameteriga input ni pass qilamiz va uning type MemberInput
   public async processSignup(input: MemberInput): Promise<Member> {
     // databasega bogliq mantiq:
@@ -21,8 +22,13 @@ class MemberService {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.RESTAURANT })  //  .findOne()memberModelni ni static methodi
       .exec();   // davomiy query larni (to'xtatish) tamomlash uchun ya'ni shu oxirgisi degan ma'noda ishlatamiz
-    console.log("exist", exist)
-    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED)  //1 ta dan ortiq restaurant ochilishiga qarshi mantiq
+    console.log("exist", exist);
+    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);  //1 ta dan ortiq restaurant ochilishiga qarshi mantiq
+
+    // kiritilgan passwordni xavfsiz bo'lishi uchun hashlab (chunarsiz qilib) bazaga joylimiz
+    const salt = await bcrypt.genSalt();
+    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+
     try {
       // Yangi Burak restaurant ni hosil qilamz static method orqali.
       // memberSchema modelmni .create methodini ishlatdik.
@@ -44,10 +50,13 @@ class MemberService {
       )
       .exec()
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-    const isMatch = input.memberPassword === member.memberPassword;
+    const isMatch = await bcrypt.compare(
+      input.memberPassword,
+      member.memberPassword
+    ); // kiritilayotgan password bazadagi user passwordi bilan birxilmi yo'qmi solishtiramiz
 
     if (!isMatch) throw new Errors(HttpCode.NOT_FOUND, Message.WRONG_PASSWORD);
-    return = await this.memberModel.findById(member._id).exec();
+    return await this.memberModel.findById(member._id).exec();
   }
 }
 

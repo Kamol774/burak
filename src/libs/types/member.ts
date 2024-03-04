@@ -2,7 +2,7 @@ import { ObjectId } from "mongoose"
 import { MemberStatus, MemberType } from "../enum/member.enum";
 
 export interface Member {
-  _id: ObjectId;
+  _id: ObjectId;  // ObjectId ni mongoose dan import qilamiz
   memberType: MemberType;
   memberStatus: MemberStatus;
   memberNick: string;

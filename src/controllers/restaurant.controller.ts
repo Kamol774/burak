@@ -49,16 +49,17 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     console.log("processSignup");
     console.log("body:", req.body);
 
-    const newMember: MemberInput = req.body;
+    const newMember: MemberInput = req.body;  // kirib kelayotgan malumotni newMember variable ga tenglab olyabmiz
     newMember.memberType = MemberType.RESTAURANT
 
-    const memberService = new MemberService();
-    const result = await memberService.processSignup(newMember);
+    const memberService = new MemberService();  // MemberService class dan instance olib memberService variable ga tenglashtirib olyapmiz
+    const result = await memberService.processSignup(newMember);  // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processSignup methodini ishlatamiz.
 
     res.send(result)
 
   } catch (err) {
     console.log("Error processSignup", err)
+    res.send(err)
   }
 };
 

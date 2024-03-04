@@ -2,6 +2,12 @@ import express from "express";
 const routerAdmin = express.Router();
 import restaurantController from "./controllers/restaurant.controller";
 
+
+// get has two argument =>
+// 1: endpoint (url)
+// 2: restaurantController ga bogliq methodlar
+
+
 // Restaurant
 routerAdmin.get("/", restaurantController.goHome);
 routerAdmin

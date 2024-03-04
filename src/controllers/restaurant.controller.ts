@@ -1,7 +1,7 @@
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 import MemberService from "../models/Member.service";
-import { MemberInput } from "../libs/types/member";
+import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enum/member.enum";
 
 const restaurantController: T = {};
@@ -34,13 +34,22 @@ restaurantController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processLogin = (req: Request, res: Response) => {
+restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    res.send("DONE")
+    console.log("body=>", req.body);
+    const input: LoginInput = req.body;  // kirib kelayotgan malumotni input variable ga tenglab olyabmiz
+
+    const memberService = new MemberService()  // MemberService modeli(class)dan instance olib memberService variable ga tenglashtirib olyapmiz
+
+    const result = await memberService.processLogin(input); // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processLogin methodini ishlatamiz.
+
+
+    res.send(result) // login bo'lgan user ma'lumotini response browser ga qaytaramiz
 
   } catch (err) {
-    console.log("Error processLogin", err)
+    console.log("Error processLogin", err);
+    res.send(err);
   }
 };
 
@@ -52,7 +61,7 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     const newMember: MemberInput = req.body;  // kirib kelayotgan malumotni newMember variable ga tenglab olyabmiz
     newMember.memberType = MemberType.RESTAURANT
 
-    const memberService = new MemberService();  // MemberService class dan instance olib memberService variable ga tenglashtirib olyapmiz
+    const memberService = new MemberService();  // MemberService modeli(class)dan instance olib memberService variable ga tenglashtirib olyapmiz
     const result = await memberService.processSignup(newMember);  // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processSignup methodini ishlatamiz.
 
     res.send(result)

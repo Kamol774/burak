@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { MemberStatus, MemberType } from "../libs/enum/member.enum";
 
 const memberSchema = new Schema({
@@ -11,20 +11,20 @@ const memberSchema = new Schema({
   memberStatus: {
     type: String,
     enum: MemberStatus,
-    default: MemberStatus.ACTIVE 
+    default: MemberStatus.ACTIVE
   },
 
   memberNick: {
     type: String,
-    index: {unique: true, sparse: true},
+    index: { unique: true, sparse: true },
     required: true,
   },
 
   memberPhone: {
     type: String,
-    index: {unique: true, sparse: true},
+    index: { unique: true, sparse: true },
     required: true,
-  }, 
+  },
 
   memberPassword: {
     type: String,
@@ -37,19 +37,19 @@ const memberSchema = new Schema({
   },
 
   memberDesc: {
-    type: String, 
+    type: String,
   },
 
   memberImage: {
-    type: String, 
+    type: String,
   },
 
   memberPoints: {
     type: Number,
-    default: 0 
+    default: 0
   },
 },
-{timestamps: true} // updatedAt, createdAt  
+  { timestamps: true } // updatedAt, createdAt  
 );
 
 export default mongoose.model('Member', memberSchema);

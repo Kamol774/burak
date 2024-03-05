@@ -15,6 +15,7 @@ class MemberService {
   // promise(void) : typescript bolganligi uchun bu method hech nmaani qaytarmaslik uchun yozilgan shart
   // agar async function bolmasa demak promise ishlatmaymiz
   // processSignup functionini parameteriga input ni pass qilamiz va uning type MemberInput
+  // processSignup methodini parametri ->input
   public async processSignup(input: MemberInput): Promise<Member> {
     // databasega bogliq mantiq:
     // exist variable hosil qilib oldik

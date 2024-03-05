@@ -23,8 +23,8 @@ export enum Message {
 
 // Java Scriptni ichidagi error larga extend bolsin
 class Errors extends Error {
-  public code: HttpCode;
-  public message: Message;
+  public code: HttpCode; // => PROPERTY
+  public message: Message;  // => PROPERTY
 
   constructor(statusCode: HttpCode, statusMessage: Message) {
     super();
@@ -32,6 +32,5 @@ class Errors extends Error {
     this.message = statusMessage
   }
 }
-
 
 export default Errors;

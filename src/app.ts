@@ -8,7 +8,7 @@ import { MORGAN_FORMAT } from './libs/config';
 // 1 - ENTRANCE
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));  // public ni static folderga aylantirib beradi
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan(MORGAN_FORMAT));
 
@@ -20,7 +20,7 @@ app.set("view engine", "ejs")
 
 
 // 4 - ROUTERS 
-app.use("/", router)            // REACT
 app.use("/admin", routerAdmin)  // EJS
+app.use("/", router)            // REACT
 
 export default app;     //moduleJS ==> module.exports = app 

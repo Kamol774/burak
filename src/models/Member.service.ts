@@ -65,9 +65,9 @@ class MemberService {
   /** SSR */////////////////////////////////////////////////////////////////////
 
 
-  // promise(void) : typescript bolganligi uchun bu method hech nmaani qaytarmaslik uchun yozilgan shart
+  // promise(void) : typescript bolganligi uchun bu method hech nmaani qaytarmaslik uchun yoziladigan shart
   // agar async function bolmasa demak promise ishlatmaymiz
-  // processSignup functionini parameteriga input ni pass qilamiz va uning type MemberInput
+  // processSignup methodini parameteriga input ni pass qilamiz va uning type MemberInput
   // processSignup methodini parametri ->input
   public async processSignup(input: MemberInput): Promise<Member> {
     // databasega bogliq mantiq:
@@ -99,8 +99,8 @@ class MemberService {
   public async processLogin(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
+        { memberNick: input.memberNick }, // searching
+        { memberNick: 1, memberPassword: 1 }  // compare qilish uchun bazadagi malumotni chaqiryapmiz
       )
       .exec()
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);

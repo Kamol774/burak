@@ -43,7 +43,7 @@ class MemberService {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
+        { memberNick: 1, memberPassword: 1 }  //options
       )
       .exec()
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
@@ -100,7 +100,7 @@ class MemberService {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick }, // searching
-        { memberNick: 1, memberPassword: 1 }  // compare qilish uchun bazadagi malumotni chaqiryapmiz
+        { memberNick: 1, memberPassword: 1 }  // options / compare qilish uchun bazadagi malumotni chaqiryapmiz
       )
       .exec()
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);

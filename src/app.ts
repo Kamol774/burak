@@ -5,6 +5,16 @@ import routerAdmin from './router-admin'
 import morgan from 'morgan';
 import { MORGAN_FORMAT } from './libs/config';
 
+import session from 'express-session';
+import ConnectMongoDB from "connect-mongodb-session";
+
+const MongoDBStore = ConnectMongoDB(session);
+const store = new MongoDBStore(
+  {
+    uri: String(process.env.MONGO_URL),
+    collection: 'sessions'
+  });
+
 // 1 - ENTRANCE
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));  // public ni static folderga aylantirib beradi
@@ -13,6 +23,20 @@ app.use(express.json());
 app.use(morgan(MORGAN_FORMAT));
 
 // 2 - SESSIONS
+app.use(
+  session({
+    secret: String(process.env.SESSION_SECRET), // .env dagi SESSION_SECRET
+    cookie: {
+      maxAge: 1000 * 3600 * 3 // 3h => yashash muddati
+    },
+    store: store,  // yuqorida ko'rsatilgan MongoDBStore ni takidlab ketyapmiz.
+    // Boilerplate options, see:
+    // * https://www.npmjs.com/package/express-session#resave
+    // * https://www.npmjs.com/package/express-session#saveuninitialized
+    resave: true, // oxirgi update dan boshlab maxAge da berilgan vaqtgacha mavjud bo'ladi, agar false bolsa birinchi kirgan vaqtdan boshlab maxAge gaja mavjud boladi(update larga qarab resave bolmaydi).
+    saveUninitialized: true
+  })
+);
 
 // 3 - VIEWS
 app.set('views', path.join(__dirname, "views"));

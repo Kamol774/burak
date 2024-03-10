@@ -1,7 +1,7 @@
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 import MemberService from "../models/Member.service";
-import { LoginInput, MemberInput } from "../libs/types/member";
+import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enum/member.enum";
 
 const memberService = new MemberService();  // MemberService modeli(class)dan instance olib memberService variable ga tenglashtirib olyapmiz
@@ -40,7 +40,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 };
 
 
-restaurantController.processSignup = async (req: Request, res: Response) => {
+restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processSignup");
 
@@ -49,9 +49,10 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 
     const result = await memberService.processSignup(newMember);  // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processSignup methodini ishlatamiz.
 
-    // TODO SESSIONS AUTHENTICATION
-
-    res.send(result)
+    req.session.member = result;
+    req.session.save(function () {
+      res.send(result)
+    })
   } catch (err) {
     console.log("Error processSignup", err)
     res.send(err)
@@ -59,16 +60,18 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 };
 
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
+restaurantController.processLogin = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processLogin");
 
     const input: LoginInput = req.body,  // kirib kelayotgan malumotni input variable ga tenglab olyabmiz
       result = await memberService.processLogin(input); // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processLogin methodini ishlatamiz.
 
-    // TODO SESSIONS AUTHENTICATION
+    req.session.member = result;
+    req.session.save(function () {
+      res.send(result) // login bo'lgan user ma'lumotini response browser ga qaytaramiz 
+    })
 
-    res.send(result) // login bo'lgan user ma'lumotini response browser ga qaytaramiz 
   } catch (err) {
     console.log("Error processLogin", err);
     res.send(err);

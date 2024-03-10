@@ -1,20 +1,35 @@
+/* K-TASK: 
+
+Shunday function yozing, u string qabul qilsin va string ichidagi unli harflar sonini qaytarsin.
+MASALAN: countVowels("string") return 1;  */
+
+function countVowel(word: string) {
+  let count = word.match(/[aeiou]/gi);
+  return count;
+}
+const result = countVowel('Assalom-alekum');
+console.log(result?.length);
+
+
+//////////////////////////////////////////////////////////////////////////
+
 /** J-TASK:
 Shunday function yozing, u string qabul qilsin va string ichidagi eng uzun sozni qaytarsin.
 MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"  */
 
-function findLongestWord(text: string) {
-  const arr = text.split(" ")
-  let sWord = ""
+// function findLongestWord(text: string) {
+//   const arr = text.split(" ")
+//   let sWord = ""
 
-  for (let word of arr) {
-    if (word.length > sWord.length) {
-      sWord = word;
-    }
-  }
-  return sWord;
-}
+//   for (let word of arr) {
+//     if (word.length > sWord.length) {
+//       sWord = word;
+//     }
+//   }
+//   return sWord;
+// }
 
-console.log(findLongestWord("Welcome to Uzbekistan"))
+// console.log(findLongestWord("Welcome to Uzbekistan"))
 
 
 

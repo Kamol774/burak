@@ -7,6 +7,7 @@ import { MORGAN_FORMAT } from './libs/config';
 
 import session from 'express-session';
 import ConnectMongoDB from "connect-mongodb-session";
+import { T } from './libs/types/common';
 
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore(
@@ -27,7 +28,7 @@ app.use(
   session({
     secret: String(process.env.SESSION_SECRET), // .env dagi SESSION_SECRET
     cookie: {
-      maxAge: 1000 * 10 // 3h => yashash muddati
+      maxAge: 1000 * 60 // 3h => yashash muddati
     },
     store: store,  // yuqorida ko'rsatilgan MongoDBStore ni takidlab ketyapmiz.
     // Boilerplate options, see:
@@ -37,6 +38,13 @@ app.use(
     saveUninitialized: true
   })
 );
+
+
+app.use(function(req, res, next) {
+  const sessionInstance = req.session as T;
+  res.locals.member = sessionInstance.member;  // brauser ni variablelari
+  next();
+})
 
 // 3 - VIEWS
 app.set('views', path.join(__dirname, "views"));

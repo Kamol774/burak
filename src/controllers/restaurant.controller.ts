@@ -1,5 +1,5 @@
 import { T } from "../libs/types/common";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enum/member.enum";
@@ -112,4 +112,20 @@ restaurantController.checkAuthSession = async (
     res.send(err);
   }
 };
-export default restaurantController
+
+restaurantController.verifyRestaurant = (  // middleware mantig'i
+  req: AdminRequest,
+  res: Response, 
+  next: NextFunction 
+  ) => { 
+      if (req.session?.member?.memberType === MemberType.RESTAURANT) {
+      req.member = req.session.member;
+      next();  // bu narsa qo'yilmasa process keyingi qadamga o'tmay qotib qoladi
+    } else {
+      const message = Message.NOT_AUTHENTICATED;
+      res.send(`<script> alert("${message}"); window.location.replace('/admin/login'); </script>`)
+      
+  }
+};
+
+export default restaurantController;

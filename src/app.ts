@@ -27,7 +27,7 @@ app.use(
   session({
     secret: String(process.env.SESSION_SECRET), // .env dagi SESSION_SECRET
     cookie: {
-      maxAge: 1000 * 3600 * 3 // 3h => yashash muddati
+      maxAge: 1000 * 10 // 3h => yashash muddati
     },
     store: store,  // yuqorida ko'rsatilgan MongoDBStore ni takidlab ketyapmiz.
     // Boilerplate options, see:

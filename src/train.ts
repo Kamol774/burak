@@ -1,14 +1,40 @@
-/* K-TASK: 
+/* L-TASK: 
+
+Shunday function yozing, u string qabul qilsin va string ichidagi hamma sozlarni chappasiga yozib va sozlar ketma-ketligini buzmasdan stringni qaytarsin.
+MASALAN: reverseSentence("we like coding!") return "ew ekil gnidoc"; */
+
+function reverseSentence(sentence: string) {
+  const arr = sentence.split(" ")
+  let newSentence = ""
+
+  for (let word of arr) {
+    if (word) {
+      newSentence = newSentence + word.split('').reverse().join('').replace(/[.,!@?#$%^&*s]/g, '') + " ";
+    }
+  }
+  return newSentence;
+}
+
+console.log(reverseSentence("we like coding!?"))
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+/* K-TASK:
 
 Shunday function yozing, u string qabul qilsin va string ichidagi unli harflar sonini qaytarsin.
 MASALAN: countVowels("string") return 1;  */
 
-function countVowel(word: string) {
-  let count = word.match(/[aeiou]/gi);
-  return count;
-}
-const result = countVowel('Assalom-alekum');
-console.log(result?.length);
+// function countVowel(word: string) {
+//   let count = word.match(/[aeiou]/gi);
+//   return count;
+// }
+// const result = countVowel('Assalom-alekum');
+// console.log(result?.length);
 
 
 //////////////////////////////////////////////////////////////////////////

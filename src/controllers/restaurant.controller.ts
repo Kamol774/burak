@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enum/member.enum";
-import Errors, { Message } from "../libs/errors";
+import Errors, { HttpCode, Message } from "../libs/errors";
 
 const memberService = new MemberService();  // MemberService modeli(class)dan instance olib memberService variable ga tenglashtirib olyapmiz
 
@@ -47,15 +47,18 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processSignup");
-
+    const file = req.file;
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
     const newMember: MemberInput = req.body;  // kirib kelayotgan malumotni newMember variable ga tenglab olyabmiz
+    newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTAURANT
 
     const result = await memberService.processSignup(newMember);  // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processSignup methodini ishlatamiz.
 
     req.session.member = result;
     req.session.save(function () {
-      res.send(result)
+      res.redirect("/admin/product/all") // signup bo'lgan user ni product page ga qaytaramiz 
     })
   } catch (err) {
     console.log("Error processLogin", err);
@@ -71,9 +74,9 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
     const input: LoginInput = req.body,  // kirib kelayotgan malumotni input variable ga tenglab olyabmiz
       result = await memberService.processLogin(input); // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processLogin methodini ishlatamiz.
 
-    req.session.member = result;
-    req.session.save(function () {
-      res.send(result) // login bo'lgan user ma'lumotini response browser ga qaytaramiz 
+    req.session.member = result; // database ga requestdagi session ni yozyapmiz
+    req.session.save(function () { // browser ga yozyapmiz
+      res.redirect("/admin/product/all") // login bo'lgan user ni product page ga qaytaramiz 
     })
 
   } catch (err) {
@@ -115,16 +118,16 @@ restaurantController.checkAuthSession = async (
 
 restaurantController.verifyRestaurant = (  // middleware mantig'i
   req: AdminRequest,
-  res: Response, 
-  next: NextFunction 
-  ) => { 
-      if (req.session?.member?.memberType === MemberType.RESTAURANT) {
-      req.member = req.session.member;
-      next();  // bu narsa qo'yilmasa process keyingi qadamga o'tmay qotib qoladi
-    } else {
-      const message = Message.NOT_AUTHENTICATED;
-      res.send(`<script> alert("${message}"); window.location.replace('/admin/login'); </script>`)
-      
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.session?.member?.memberType === MemberType.RESTAURANT) {
+    req.member = req.session.member;
+    next();  // bu narsa qo'yilmasa process keyingi qadamga o'tmay qotib qoladi
+  } else {
+    const message = Message.NOT_AUTHENTICATED;
+    res.send(`<script> alert("${message}"); window.location.replace('/admin/login'); </script>`)
+
   }
 };
 

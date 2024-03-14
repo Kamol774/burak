@@ -10,11 +10,10 @@ import ConnectMongoDB from "connect-mongodb-session";
 import { T } from './libs/types/common';
 
 const MongoDBStore = ConnectMongoDB(session);
-const store = new MongoDBStore(
-  {
-    uri: String(process.env.MONGO_URL),
-    collection: 'sessions'
-  });
+const store = new MongoDBStore({
+  uri: String(process.env.MONGO_URL),
+  collection: 'sessions'
+});
 
 // 1 - ENTRANCE
 const app = express();
@@ -28,7 +27,7 @@ app.use(
   session({
     secret: String(process.env.SESSION_SECRET), // .env dagi SESSION_SECRET
     cookie: {
-      maxAge: 1000 * 60 // 3h => yashash muddati
+      maxAge: 1000 * 60 * 5 // 5minutes => yashash muddati
     },
     store: store,  // yuqorida ko'rsatilgan MongoDBStore ni takidlab ketyapmiz.
     // Boilerplate options, see:
@@ -40,7 +39,7 @@ app.use(
 );
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const sessionInstance = req.session as T;
   res.locals.member = sessionInstance.member;  // brauser ni variablelari
   next();

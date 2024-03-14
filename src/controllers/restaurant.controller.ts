@@ -5,7 +5,7 @@ import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enum/member.enum";
 import Errors, { HttpCode, Message } from "../libs/errors";
 
-const memberService = new MemberService();  // MemberService modeli(class)dan instance olib memberService variable ga tenglashtirib olyapmiz
+const memberService = new MemberService();  // MemberService classdan instance olib memberService variable ga tenglashtirib olyapmiz
 
 const restaurantController: T = {};
 
@@ -48,16 +48,16 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
   try {
     console.log("processSignup");
     const file = req.file;
-    if (!file)
+    if (!file)  // signup jarayonida rasm yuklamasa error beramiz
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
     const newMember: MemberInput = req.body;  // kirib kelayotgan malumotni newMember variable ga tenglab olyabmiz
-    newMember.memberImage = file?.path;
+    newMember.memberImage = file?.path.replace(/\\/g, "/"); // kiritilgan fayl manzilini DB ga yozamiz. (fayl o'zi server ga yoziladi)
     newMember.memberType = MemberType.RESTAURANT
 
     const result = await memberService.processSignup(newMember);  // hosil qilingan memberService objectini result variable ga tenglashtirib olyabmiz va hosil bolgan object orqali processSignup methodini ishlatamiz.
 
-    req.session.member = result;
-    req.session.save(function () {
+    req.session.member = result; // database ga requestdagi session ni yozyapmiz
+    req.session.save(function () { // browser ga yozyapmiz
       res.redirect("/admin/product/all") // signup bo'lgan user ni product page ga qaytaramiz 
     })
   } catch (err) {

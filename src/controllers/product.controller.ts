@@ -20,7 +20,9 @@ const productController: T = {};
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts");
-    res.render("products")
+    const data = await productService.getAllProducts();
+
+    res.render("products", { products: data }) // render ni 2-argumenti qanday nom bn nomlash: products deb nomladik
   } catch (err) {
     console.log("Error getAllProducts", err)
     if (err instanceof Errors) res.status(err.code).json(err);

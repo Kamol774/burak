@@ -6,7 +6,7 @@ import { AdminRequest } from "../libs/types/member";
 import { ProductInput } from "../libs/types/product";
 
 
-const productService = new ProductService();  // ProductService classdan instance olib prodctService variable ga tenglashtirib olyapmiz
+const productService = new ProductService();  // ProductService classdan instance olib productService variable ga tenglashtirib olyapmiz
 
 const productController: T = {};
 

@@ -36,7 +36,7 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
     if (!req.files.length)
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
     const data: ProductInput = req.body; // kirib kelayotgan ma'lumotni data variable ga tenglayapmiz
-    data.productImages = req.files.map(ele => {
+    data.productImages = req.files.map(ele => {  // map orqali iteration qilyapmiz
       return ele.path.replace(/\\/g, "/");
     });
 

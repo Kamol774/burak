@@ -105,9 +105,8 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
   try {
     console.log("getUsers")
     const result = await memberService.getUsers();
-    console.log("result", result);
 
-    res.render("users", { users: result }); // ejs ga datani paste qilyapmiz
+    res.render("users", { users: result }); // ejs ga datani paste qilyapmiz. Result ni users deb nomlab olyapmiz.
   } catch (err) {
     console.log("Error getUsers", err)
     res.redirect("/admin/login")
@@ -118,6 +117,7 @@ restaurantController.updateChosenUser = async (req: Request, res: Response) => {
   try {
     console.log("updateChosenUser");
     const result = await memberService.updateChosenUser(req.body);
+
     res.status(HttpCode.OK).json({ data: result });
   } catch (err) {
     console.log("Error updateChosenUser:", err);
@@ -150,7 +150,7 @@ restaurantController.verifyRestaurant = (  // middleware mantig'i
   next: NextFunction
 ) => {
   if (req.session?.member?.memberType === MemberType.RESTAURANT) {
-    req.member = req.session.member;
+    req.member = req.session.member; // req-session-member ni type ni tekshiramiz. Restoran bo'lsa: req member ga req.session.member ni yuklaymiz. Agar authenticated user bolsa request ichida member mavjud bo'lsin degan mantiq. Hama joyda member ni ishlataolamiz.
     next();  // bu narsa qo'yilmasa process keyingi qadamga o'tmay qotib qoladi
   } else {
     const message = Message.NOT_AUTHENTICATED;

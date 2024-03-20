@@ -118,13 +118,15 @@ class MemberService {
     const result = await this.memberModel
       .find({ memberType: MemberType.USER })
       .exec();
-
+    // agar result bo'sh qaytsa (natijasizlik) bo'sa quyida o'zimiz customise error hosil qilyapmiz
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
     return result;
   }
 
+  // Define qismi: updateChosenUser ning 1 ta parametri bor: input
   public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
-    input._id = shapeaIntoMongooseObjectId(input._id);
+    input._id = shapeaIntoMongooseObjectId(input._id); // kelayotgan input(string)ni Mongoose-object-id ga o'zgartirib olamiz 
     const result = await this.memberModel
       .findByIdAndUpdate({ _id: input._id }, input, { new: true })
       .exec();

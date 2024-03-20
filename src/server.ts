@@ -14,13 +14,13 @@
 
 // Cluster => Database => Collection => Document => Dataset
 
-import dotenv from 'dotenv';
+import dotenv from 'dotenv';  // hardoim dotenv yuqorida(birinchida) turishi shart
 dotenv.config();
 
 import mongoose from 'mongoose';
 import app from './app';
 
-mongoose
+mongoose  // MongoDB ga mongoose orqali ulanyapmiz
   .connect(process.env.MONGO_URL as string, {})
   .then((data) => {
     console.log('MongoDB connection succeed');

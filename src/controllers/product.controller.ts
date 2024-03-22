@@ -33,19 +33,24 @@ productController.getAllProducts = async (req: Request, res: Response) => {
 
 productController.createNewProduct = async (req: AdminRequest, res: Response) => {
   try {
-    console.log("createNewProduct");
-    if (!req.files.length)
+    console.log('createNewProduct');
+    console.log("req.body:", req.body);
+
+    console.log('files');
+    if (!req.files?.length)
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
+
     const data: ProductInput = req.body; // kirib kelayotgan ma'lumotni data variable ga tenglayapmiz
-    data.productImages = req.files.map(ele => {  // map orqali iteration qilyapmiz
-      return ele.path.replace(/\\/g, "/");
+    data.productImages = req.files?.map((ele) => {// map orqali iteration qilyapmiz
+      return ele.path;
     });
 
-    await productService.createNewProduct(data)
-    console.log("data=>", data);
-    res.send(`<script> alert("Successful creation!"); window.location.replace('admin/product/all') </script>`);
+    console.log("data:", data);
+    await productService.createNewProduct(data);
+    res.send(`<script> alert("Sucessfull creation !"); window.location.replace('/admin/product/all') </script>`);
+
   } catch (err) {
-    console.log("Error createNewProduct", err)
+    console.log("Error,createNewProduct:", err);
     const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(`<script> alert("${message}"); window.location.replace('admin/product/all') </script>`);
   }

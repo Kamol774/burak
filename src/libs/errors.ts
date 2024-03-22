@@ -9,6 +9,7 @@ export enum HttpCode {
   INTERNAL_SERVER_ERROR = 500,
 }
 
+
 export enum Message {
   SOMETHING_WENT_WRONG = "Something went wrong",
   NO_DATA_FOUND = "No data is found!",
@@ -17,8 +18,9 @@ export enum Message {
 
   USED_NICK_PHONE = "You are inserting already used nick or phone!",
   NO_MEMBER_NICK = "No member with that member nick!",
+  BLOCKED_USER = "You have been blocked, contact restaurant",
   WRONG_PASSWORD = "Wrong password, please try again!",
-  NOT_AUTHENTICATED = "You are not authenticated, Please login first!"
+  NOT_AUTHENTICATED = "You are not authenticated, Please login first!",
 }
 
 

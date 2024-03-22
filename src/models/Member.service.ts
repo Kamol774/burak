@@ -2,7 +2,7 @@
 import MemberModel from "../schema/Member.model";
 import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/errors";
-import { MemberType } from "../libs/enum/member.enum";
+import { MemberStatus, MemberType } from "../libs/enum/member.enum";
 import * as bcrypt from "bcryptjs"
 import { shapeaIntoMongooseObjectId } from "../libs/config";
 
@@ -38,26 +38,36 @@ class MemberService {
     }
   }
 
-
   public async login(input: LoginInput): Promise<Member> {
-    //TODO: consider member status later
     const member = await this.memberModel
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }  //options
+        {
+          memberNick: input.memberNick,
+          memberStatus: { $ne: MemberStatus.DELETE }, // ne- not equal  
+        },
+        { memberNick: 1, memberPassword: 1, memberStatus: 1 } //options
       )
-      .exec()
+      .exec();
+    /// delete bo'lgan user ga login cheklanadi
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+    else if (member.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.FORBIDDEN, Message.BLOCKED_USER);
+    }
+
+    console.log("member:", member);
+
     const isMatch = await bcrypt.compare(
       input.memberPassword,
       member.memberPassword
     ); // kiritilayotgan password bazadagi user passwordi bilan birxilmi yo'qmi solishtiramiz
+
     if (!isMatch) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
     return await this.memberModel.findById(member._id).lean().exec();
-  }
+    // leandatabasedan olgan malumotimizni ozgartirish imkoniyati boladi 
 
+  }
 
 
 

@@ -1,6 +1,6 @@
 console.log("Products frontend javascript file");
 
-$(function () {
+$(function () {  // document ready function (web to'liq zagruzka bo'lmaguncha JS ishlamay turishi uchun)
   $(".product-collection").on("change", () => {
     const selectedValue = $(".product-collection").val();
     if (selectedValue === "DRINK") {
@@ -40,8 +40,6 @@ $(function () {
       alert("Product update failed!");
     }
   });
-
-
 });
 
 function validateForm() {

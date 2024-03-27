@@ -1,20 +1,37 @@
+/* R-TASK:
+
+Shunday function yozing, u string parametrga ega bolsin. String "1+2" holatda pass qilinganda string ichidagi sonlar yigindisini number holatda qaytarsin.
+MASALAN: calculate("1+3") return 4;
+ */
+
+function calculate(amount: string) {
+  let result = 0
+  const m = amount.split('').map((num => parseInt(num) ? result + (parseInt(num)) : 0)
+  )
+  m.forEach(num => { result += num })
+  return console.log(result)
+}
+
+
+calculate("7+9")
+
+
+
 /* Q-TASK:
 
 Shunday function yozing, u 2 ta parametrga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin.
 MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false   */
 
-function hasProperty(object: any, key: any) {
-  if (object.hasOwnProperty(key)) {
-    return true
-  } else {
-    return false
-  }
-}
+// function hasProperty(object: any, key: any) {
+//   if (object.hasOwnProperty(key)) {
+//     return true
+//   } else {
+//     return false
+//   }
+// }
 
-// hasProperty({ name: "BMW", model: "M3" }, "model")
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model"))
-console.log(hasProperty({ name: "BMW", model: "M3" }, "year"))
-console.log(hasProperty({ name: "BMW", model: "M3" }, "name"))
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "model"))
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "year"))
 
 
 
@@ -240,5 +257,4 @@ MASALAN: getHighestIndex([5, 21, 12, 21, 8]) return qiladi 1 sonini */
 // }
 
 // getHighestIndex([1, 136, 8, 3, 156, 19, 2, 34, 55, 7])
-
-
+/**/

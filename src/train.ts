@@ -1,25 +1,65 @@
+// T - TASK 
+// Shunday function yozing, u sonlardan tashkil topgan 2 ta array qabul qilsin va ikkala arraydagi sonlarni tartiblab bir arrayda qaytarsin
+// MASALAN: mergeSortedArrays([0,3,4,31], [4,6,30]); return [0,3,4,4,6,30,31]
+
+
+function mergeSortedArrays(arr1: number[], arr2: number[]) {
+  let newArray: number[] = [];
+  let i: number = 0;
+  let j: number = 0;
+
+  while (i < arr1.length && j < arr2.length) {
+    if (arr1[i] < arr2[j]) {
+      newArray.push(arr1[i]);
+      i++;
+    } else {
+      newArray.push(arr2[j]);
+      j++;
+    }
+  }
+
+  while (i < arr1.length) {
+    newArray.push(arr1[i]);
+    i++;
+  }
+
+  while (j < arr2.length) {
+    newArray.push(arr2[j]);
+    j++;
+  }
+
+  return newArray;
+}
+
+const arr1: number[] = [0, 3, 4, 31];
+const arr2: number[] = [4, 6, 30];
+
+console.log(mergeSortedArrays(arr1, arr2));
+
+
+
 /** S-TASK:
 
 Shunday function yozing, u numberlardan tashkil topgan array qabul qilsin va osha numberlar orasidagi tushib qolgan sonni topib uni return qilsin
 MASALAN: missingNumber([3, 0, 1]) return 2
  */
 
-function missingNumber(arr: number[]) {
-  const newArray = arr.sort();
+// function missingNumber(arr: number[]) {
+//   const newArray = arr.sort();
 
-  for (let i = 0; i < newArray.length; i++) {
-    if (newArray[i] + 1 !== newArray[i + 1]) {
-      if (newArray.some((ele) => { return ele === 0 })) {
-        return (console.log(i + 1))
-      } else {
-        return (console.log(i + 2))
-      }
-    }
-  }
-}
+//   for (let i = 0; i < newArray.length; i++) {
+//     if (newArray[i] + 1 !== newArray[i + 1]) {
+//       if (newArray.some((ele) => { return ele === 0 })) {
+//         return (console.log(i + 1))
+//       } else {
+//         return (console.log(i + 2))
+//       }
+//     }
+//   }
+// }
 
 
-missingNumber([3, 2, 1, 0, 5, 6])
+// missingNumber([3, 2, 1, 0, 5, 6])
 
 
 

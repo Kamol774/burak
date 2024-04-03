@@ -1,40 +1,71 @@
-// T - TASK 
+// U-TASK:
+
+// Shunday function yozing, uni number parametri bolsin va 0 dan berilgan parametrgacha bolgan oraliqdagi faqat toq sonlar nechtaligini return qilsin
+// MASALAN: sumOdds(9) return 4; sumOdds(11) return 5;
+
+function summOdds(num: number) {
+  let count = [];
+  for (let i = 1; i < num; i++) {
+    if (i % 2 !== 0) {
+      count.push(i);
+    }
+  } return count.join('').length
+}
+
+console.log(summOdds(9))
+console.log(summOdds(11))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// T - TASK
 // Shunday function yozing, u sonlardan tashkil topgan 2 ta array qabul qilsin va ikkala arraydagi sonlarni tartiblab bir arrayda qaytarsin
 // MASALAN: mergeSortedArrays([0,3,4,31], [4,6,30]); return [0,3,4,4,6,30,31]
 
 
-function mergeSortedArrays(arr1: number[], arr2: number[]) {
-  let newArray: number[] = [];
-  let i: number = 0;
-  let j: number = 0;
+// function mergeSortedArrays(arr1: number[], arr2: number[]) {
+//   let newArray: number[] = [];
+//   let i: number = 0;
+//   let j: number = 0;
 
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] < arr2[j]) {
-      newArray.push(arr1[i]);
-      i++;
-    } else {
-      newArray.push(arr2[j]);
-      j++;
-    }
-  }
+//   while (i < arr1.length && j < arr2.length) {
+//     if (arr1[i] < arr2[j]) {
+//       newArray.push(arr1[i]);
+//       i++;
+//     } else {
+//       newArray.push(arr2[j]);
+//       j++;
+//     }
+//   }
 
-  while (i < arr1.length) {
-    newArray.push(arr1[i]);
-    i++;
-  }
+//   while (i < arr1.length) {
+//     newArray.push(arr1[i]);
+//     i++;
+//   }
 
-  while (j < arr2.length) {
-    newArray.push(arr2[j]);
-    j++;
-  }
+//   while (j < arr2.length) {
+//     newArray.push(arr2[j]);
+//     j++;
+//   }
 
-  return newArray;
-}
+//   return newArray;
+// }
 
-const arr1: number[] = [0, 3, 4, 31];
-const arr2: number[] = [4, 6, 30];
+// const arr1: number[] = [0, 3, 4, 31];
+// const arr2: number[] = [4, 6, 30];
 
-console.log(mergeSortedArrays(arr1, arr2));
+// console.log(mergeSortedArrays(arr1, arr2));
 
 
 

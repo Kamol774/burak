@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
 import router from './router';
-import routerAdmin from './router-admin'
+import routerAdmin from './router-admin';
+import cookieParser from "cookie-parser"
 import morgan from 'morgan';
 import { MORGAN_FORMAT } from './libs/config';
 
@@ -20,6 +21,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));  // public ni static folderga aylantirib beradi
 app.use(express.urlencoded({ extended: true })); // parse incoming URL-encoded form data from the request body. { extended: true }: nested objects and arrays to be encoded in the URL.
 app.use(express.json()); // built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT)); // log information about incoming requests, including details like request method, URL, status code, response time, and more.
 
 // 2 - SESSIONS

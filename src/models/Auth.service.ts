@@ -4,7 +4,10 @@ import { Member } from "../libs/types/member";
 import jwt from "jsonwebtoken";
 
 class AuthService {
-  constructor() { }
+  private readonly secretToken;
+  constructor() {
+    this.secretToken = process.env.SECRET_TOKEN as string;
+  }
 
   public async createToken(payload: Member) {
     // payload bu biz tokenga almashtirmoqchi bo'lgan narsa (kirib kelgan malumot) 
@@ -25,6 +28,12 @@ class AuthService {
         }
       );
     });
+  }
+
+  public async checkAuth(token: string): Promise<Member> {
+    const result: Member = (await jwt.verify(token, this.secretToken)) as Member; // jwt external package ni verify methodini chaqiryapmiz. U cookies dagi token dan membernickni olib beryapti. token mavjud bo'lmagan paytda xatolik beradi
+    console.log(`------ [AUTH] memberNick: ${result.memberNick} ------`);
+    return result
   }
 }
 

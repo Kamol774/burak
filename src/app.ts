@@ -18,10 +18,10 @@ const store = new MongoDBStore({
 // Express imiz 4 qismdan iborat !
 // 1 - ENTRANCE
 const app = express();
-app.use(express.static(path.join(__dirname, "public")));  // public ni static folderga aylantirib beradi
-app.use(express.urlencoded({ extended: true })); // parse incoming URL-encoded form data from the request body. { extended: true }: nested objects and arrays to be encoded in the URL.
+app.use(express.static(path.join(__dirname, "public")));  // public ni static folderga aylantirib beradi (userlar uchun bu folder ochiq bo'ladi)
+app.use(express.urlencoded({ extended: true })); // (traditional requestlarni qabul qilish uchun) parse incoming URL-encoded form data from the request body. { extended: true }: nested objects and arrays to be encoded in the URL.
 app.use(express.json()); // built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
-app.use(cookieParser());
+app.use(cookieParser());// (request dagi cookies larni parse qilish uchun)
 app.use(morgan(MORGAN_FORMAT)); // log information about incoming requests, including details like request method, URL, status code, response time, and more.
 
 // 2 - SESSIONS

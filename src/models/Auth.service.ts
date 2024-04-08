@@ -9,7 +9,7 @@ class AuthService {
     this.secretToken = process.env.SECRET_TOKEN as string;
   }
 
-  public async createToken(payload: Member) {
+  public async createToken(payload: Member): Promise<String> {
     // payload bu biz tokenga almashtirmoqchi bo'lgan narsa (kirib kelgan malumot) 
     return new Promise((resolve, reject) => {
       const duration = `${AUTH_TIMER}h`;

@@ -1,3 +1,63 @@
+/* W-TASK:
+
+Shunday function yozing, uni array va number parametrlari bolsin. Function arrayni numberda berilgan uzunlikda kesib bolaklarga ajratilgan array holatida qaytarsin
+MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9], [10]] */
+
+function chunkArray<T>(arr: T[], num: number) {
+  return arr.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / num);
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = [];
+    }
+    resultArray[chunkIndex].push(item);
+    return resultArray;
+  }, [] as T[][]);
+}
+
+const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+console.log(result);
+
+
+// 2-variant of W-task
+
+// function chunkArray(arr: any, num: number) {
+//   let newArr = []
+//   for (let i = 0; i <= arr.length; i++) {
+//     newArr.push(arr.slice(0, num))
+//     for (let j = 0; j < num; j++) {
+//       arr.shift()
+//     }
+//     if (arr.length < num) {
+//       newArr.push(arr.slice(0, arr.length))
+//     } else {
+//       null
+//     }
+//   }
+//   console.log(newArr)
+// }
+
+// chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3)
+
+
+
+
+// const numbers = [5, 6, 9, 2, 4, 7];
+// // reduce - qisqartirish
+// const result = numbers.reduce((total, curValue, curIndex) => {
+//   console.log("total: ", total);
+//   console.log(`reduce method=> ${curIndex}: ${curValue}`);
+//   return total + curValue;
+// }, 0);    // 0 buyerda initial value.
+// console.log("reduce method's result:", result);
+
+
+
+
+
+
+
+
+
 /* V-TASK:
 
 Shunday function yozing, uni string parametri bolsin va stringdagi harf va u harf necha marta takrorlangani sonidan tashkil topgan object qaytarsin.
@@ -5,20 +65,20 @@ MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 */
 
 
-function countChars(word: string) {
-  const countLetter: any = {};
+// function countChars(word: string) {
+//   const countLetter: any = {};
 
-  for (const letter of word) {
-    if (!countLetter[letter]) {
-      countLetter[letter] = 1;
-    } else {
-      countLetter[letter]++;
-    }
-  }
+//   for (const letter of word) {
+//     if (!countLetter[letter]) {
+//       countLetter[letter] = 1;
+//     } else {
+//       countLetter[letter]++;
+//     }
+//   }
 
-  return countLetter;
-}
-console.log(countChars("hello"))
+//   return countLetter;
+// }
+// console.log(countChars("hello"))
 
 
 

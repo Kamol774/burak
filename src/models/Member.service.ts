@@ -19,6 +19,7 @@ class MemberService {
   public async getRestaurant(): Promise<Member> {
     const result = await this.memberModel
       .findOne({ memberType: MemberType.RESTAURANT })
+      .lean() //documentni edit qilish(ma'lumot qo'shish, o'zgartirish) imkonini beradi
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 

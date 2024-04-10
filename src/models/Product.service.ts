@@ -4,7 +4,7 @@ import Errors, { HttpCode, Message } from "../libs/errors";
 import { Product, ProductInput, ProductInquiry, ProductUpdateInput } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import { T } from "../libs/types/common";
-
+import { ObjectId } from "mongoose";
 
 
 class ProductService {
@@ -22,7 +22,7 @@ class ProductService {
     if (inquiry.productCollection)
       match.productCollection = inquiry.productCollection;
     if (inquiry.search) {
-      match.productName = { $regex: new RegExp(inquiry.search, "i") };
+      match.productName = { $regex: new RegExp(inquiry.search, "i") }; //name orqali poisk qilish mantig'i
     }
 
     const sort: T = inquiry.order === "productPrice"
@@ -41,6 +41,21 @@ class ProductService {
     return result;
   }
 
+  public async getProduct(memberId: ObjectId | null, id: string): Promise<Product> {
+    const productId = shapeaIntoMongooseObjectId(id);
+
+    let result = await this.productModel
+      .findOne({
+        _id: productId,
+        productStatus: ProductStatus.PROCESS,
+      })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    // TODO: if authenticated users => first => view log creation
+
+    return result;
+  }
 
 
   /** SSR *///////////////////////////////////////////////////////////////

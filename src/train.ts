@@ -1,21 +1,54 @@
+/* X-TASK:
+
+Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
+ 
+MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2  */
+
+// if (typeof obj[key] === 'string' && obj[key].includes(target)) {
+
+
+function countOccurrences(obj: object | any, key: any) {
+  let count = 0;
+  function countKeys(val: any) {
+    for (let prop in val) {
+      if (obj.hasOwnProperty(prop)) {
+        if (typeof val[prop] === "object") {
+          countKeys(val[prop]);
+        } else if (prop === key) {
+          count++;
+        }
+      }
+    }
+  }
+  countKeys(obj);
+  return console.log(count);
+}
+
+countOccurrences({ model: 'Bugatti', steer: { model: 'HANKOOK', size: 30 } }, 'model')
+
+
+
+
+
+
 /* W-TASK:
 
 Shunday function yozing, uni array va number parametrlari bolsin. Function arrayni numberda berilgan uzunlikda kesib bolaklarga ajratilgan array holatida qaytarsin
 MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9], [10]] */
 
-function chunkArray<T>(arr: T[], num: number) {
-  return arr.reduce((resultArray, item, index) => {
-    const chunkIndex = Math.floor(index / num);
-    if (!resultArray[chunkIndex]) {
-      resultArray[chunkIndex] = [];
-    }
-    resultArray[chunkIndex].push(item);
-    return resultArray;
-  }, [] as T[][]);
-}
+// function chunkArray<T>(arr: T[], num: number) {
+//   return arr.reduce((resultArray, item, index) => {
+//     const chunkIndex = Math.floor(index / num);
+//     if (!resultArray[chunkIndex]) {
+//       resultArray[chunkIndex] = [];
+//     }
+//     resultArray[chunkIndex].push(item);
+//     return resultArray;
+//   }, [] as T[][]);
+// }
 
-const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
-console.log(result);
+// const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+// console.log(result);
 
 
 // 2-variant of W-task

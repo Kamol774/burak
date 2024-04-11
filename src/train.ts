@@ -1,30 +1,52 @@
+/*  Y-TASK:
+
+ Shunday function yozing, uni 2 ta array parametri bolsin. Function ikkala arrayda ham ishtirok etgan qiymatlarni bir arrayda qaytarsin
+ MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
+*/
+
+
+function findIntersection(arr1: any[], arr2: any[]): any[] {
+  const sameElements = arr1.filter(element => arr2.includes(element));
+  return sameElements;
+}
+
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [3, 4, 5, 6, 7];
+const result = findIntersection(arr1, arr2);
+
+console.log(result);
+
+
+
+
+
 /* X-TASK:
 
 Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
- 
+
 MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2  */
 
 // if (typeof obj[key] === 'string' && obj[key].includes(target)) {
 
 
-function countOccurrences(obj: object | any, key: any) {
-  let count = 0;
-  function countKeys(val: any) {
-    for (let prop in val) {
-      if (obj.hasOwnProperty(prop)) {
-        if (typeof val[prop] === "object") {
-          countKeys(val[prop]);
-        } else if (prop === key) {
-          count++;
-        }
-      }
-    }
-  }
-  countKeys(obj);
-  return console.log(count);
-}
+// function countOccurrences(obj: object | any, key: any) {
+//   let count = 0;
+//   function countKeys(val: any) {
+//     for (let prop in val) {
+//       if (obj.hasOwnProperty(prop)) {
+//         if (typeof val[prop] === "object") {
+//           countKeys(val[prop]);
+//         } else if (prop === key) {
+//           count++;
+//         }
+//       }
+//     }
+//   }
+//   countKeys(obj);
+//   return console.log(count);
+// }
 
-countOccurrences({ model: 'Bugatti', steer: { model: 'HANKOOK', size: 30 } }, 'model')
+// countOccurrences({ model: 'Bugatti', steer: { model: 'HANKOOK', size: 30 } }, 'model')
 
 
 

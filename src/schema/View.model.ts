@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ViewGroup } from "src/libs/enum/view.enum";
+import { ViewGroup } from "../libs/enum/view.enum";
 
 const viewSchema = new Schema({
   viewGroup: {

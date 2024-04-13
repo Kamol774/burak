@@ -16,7 +16,7 @@ const productController: T = {};
 productController.getProducts = async (req: Request, res: Response) => {
   try {
     console.log("getProducts");
-    const { page, limit, order, productCollection, search } = req.query;
+    const { page, limit, order, productCollection, search } = req.query; // distruction 
     const inquiry: ProductInquiry = {
       order: String(order),
       page: Number(page),
@@ -38,7 +38,7 @@ productController.getProducts = async (req: Request, res: Response) => {
 productController.getProduct = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("getProduct");
-    const { id } = req.params;
+    const { id } = req.params; // distruction 
     console.log("req.member==>", req.member)
     const memberId = req.member?._id ?? null,
       result = await productService.getProduct(memberId, id);

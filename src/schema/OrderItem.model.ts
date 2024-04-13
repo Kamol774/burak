@@ -20,7 +20,6 @@ const orderItemScheme = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Product",
   },
-
 },
   { timestamps: true, collection: "orderItems" }
 );

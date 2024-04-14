@@ -1,19 +1,23 @@
 import { Member } from "../libs/types/member";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
-import { Order, OrderInquiry, OrderItemInput } from "../libs/types/order";
+import { Order, OrderInquiry, OrderItemInput, OrderUpdateInput } from "../libs/types/order";
 import { shapeaIntoMongooseObjectId } from "../libs/config";
 import Errors, { Message } from "../libs/errors";
 import { HttpCode } from "../libs/errors";
 import { ObjectId } from "mongoose"
+import MemberService from "./Member.service";
+import { OrderStatus } from "../libs/enum/order.enum";
 
 class OrderService {
   private readonly orderModel;
   private readonly orderItemModel;
+  private readonly memberService;
 
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
+    this.memberService = new MemberService();
   }
 
   public async createOrder(member: Member, input: OrderItemInput[]): Promise<Order> {
@@ -57,7 +61,7 @@ class OrderService {
 
   public async getMyOrders(member: Member, inquiry: OrderInquiry): Promise<Order[]> {
     const memberId = shapeaIntoMongooseObjectId(member._id);
-    const matches = { memberId: memberId, orderStatus: inquiry.orderStatus };
+    const matches = { memberId: memberId, orderStatus: inquiry.orderStatus };  // login bo'lgan userda mavjud orderlarni ko'rish uchun mantiq
 
     const result = await this.orderModel.aggregate([
       { $match: matches },
@@ -85,7 +89,30 @@ class OrderService {
 
     return result;
   }
+
+  public async updateOrder(member: Member, input: OrderUpdateInput): Promise<Order> {
+    const memberId = shapeaIntoMongooseObjectId(member._id),
+      orderId = shapeaIntoMongooseObjectId(input.orderId),
+      orderStatus = input.orderStatus;
+
+    const result = await this.orderModel.findOneAndUpdate(
+      {
+        memberId: memberId,
+        _id: orderId,
+      },
+      { orderStatus: orderStatus },
+      { new: true }
+    )
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+    // orderStatus PAUSE => PROCESS
+    if (orderStatus === OrderStatus.PROCESS) {
+      await this.memberService.addUserPoint(member, 1);
+    }
+    return result;
+  }
 }
+
 
 export default OrderService;
 

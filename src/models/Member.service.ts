@@ -110,8 +110,20 @@ class MemberService {
     return result;
   }
 
+  public async addUserPoint(member: Member, point: number): Promise<Member> {
+    const memberId = shapeaIntoMongooseObjectId(member._id);
 
-
+    return await this.memberModel.findByIdAndUpdate(
+      {
+        _id: memberId,
+        memberType: MemberType.USER,
+        MemberStatus: MemberStatus.ACTIVE,
+      },
+      { $inc: { memberPoints: point } }, // nimani o'zgartirish kk 
+      { new: true } // option
+    )
+      .exec();
+  }
 
 
 

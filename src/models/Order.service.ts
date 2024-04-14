@@ -1,7 +1,7 @@
 import { Member } from "../libs/types/member";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
-import { Order, OrderItemInput } from "../libs/types/order";
+import { Order, OrderInquiry, OrderItemInput } from "../libs/types/order";
 import { shapeaIntoMongooseObjectId } from "../libs/config";
 import Errors, { Message } from "../libs/errors";
 import { HttpCode } from "../libs/errors";
@@ -54,6 +54,39 @@ class OrderService {
     const OrderItemState = await Promise.all(promisedList);
     console.log("OrderItemState:", OrderItemState)
   }
+
+  public async getMyOrders(member: Member, inquiry: OrderInquiry): Promise<Order[]> {
+    const memberId = shapeaIntoMongooseObjectId(member._id);
+    const matches = { memberId: memberId, orderStatus: inquiry.orderStatus };
+
+    const result = await this.orderModel.aggregate([
+      { $match: matches },
+      { $sort: { updatedAt: -1 } },
+      { $skip: (inquiry.page - 1) * inquiry.limit },
+      { $limit: inquiry.limit },
+      {
+        $lookup: {
+          from: "orderItems",  // collection name
+          localField: "_id",   // nimani olib kelish kk
+          foreignField: "orderId",   // qaysi nom bilan izlash kk
+          as: "orderItems",   // qahysi nom bilan saqlash kk
+        }
+      },
+      {
+        $lookup: {
+          from: "products",  // collection name
+          localField: "orderItems.productId",   // nimani olib kelish kk
+          foreignField: "_id",   // qaysi nom bilan izlash kk
+          as: "productData",   // qahysi nom bilan saqlash kk
+        }
+      }
+    ]).exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND)
+
+    return result;
+  }
 }
 
 export default OrderService;
+
+

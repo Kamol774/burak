@@ -9,11 +9,11 @@ import { OrderStatus } from "../libs/enum/order.enum";
 
 const orderService = new OrderService();
 
-const orderController: T = {};
+const orderController: T = {};      // quyida req-res => argument
 orderController.createOrder = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("createOrder");
-    const result = await orderService.createOrder(req.member, req.body);
+    const result = await orderService.createOrder(req.member, req.body);// req-res =>argument
 
     res.status(HttpCode.CREATED).json(result);
   } catch (err) {

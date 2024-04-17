@@ -19,12 +19,12 @@ class OrderService {
     this.orderItemModel = OrderItemModel;
     this.memberService = new MemberService();
   }
-
+  //                      quyida req-res => parametri bor deyiladi
   public async createOrder(member: Member, input: OrderItemInput[]): Promise<Order> {
     const memberId = shapeaIntoMongooseObjectId(member._id);
     const amount = input.reduce((accumulator: number, item: OrderItemInput) => {
       return accumulator + item.itemPrice * item.itemQuantity;
-    }, 0);
+    }, 0); // array ning iteration methodi
     const delivery = amount < 100 ? 5 : 0;
     console.log("amount:", amount, "delivery:", delivery);
     try {
@@ -73,7 +73,7 @@ class OrderService {
           from: "orderItems",  // collection name
           localField: "_id",   // nimani olib kelish kk
           foreignField: "orderId",   // qaysi nom bilan izlash kk
-          as: "orderItems",   // qahysi nom bilan saqlash kk
+          as: "orderItems",   // qaysi nom bilan saqlash kk
         }
       },
       {
@@ -81,7 +81,7 @@ class OrderService {
           from: "products",  // collection name
           localField: "orderItems.productId",   // nimani olib kelish kk
           foreignField: "_id",   // qaysi nom bilan izlash kk
-          as: "productData",   // qahysi nom bilan saqlash kk
+          as: "productData",   // qaysi nom bilan saqlash kk
         }
       }
     ]).exec();
@@ -99,9 +99,9 @@ class OrderService {
       {
         memberId: memberId,
         _id: orderId,
-      },
-      { orderStatus: orderStatus },
-      { new: true }
+      }, // filter
+      { orderStatus: orderStatus }, // update
+      { new: true } // options
     )
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
@@ -112,7 +112,6 @@ class OrderService {
     return result;
   }
 }
-
 
 export default OrderService;
 

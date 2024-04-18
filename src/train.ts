@@ -1,19 +1,33 @@
+/*  ZB-TASK:
+
+Shunday function yozing, uni 2 ta number parametri bolsin va berilgan sonlar orasidan random raqam return qilsin
+MASALAN: randomBetween(30, 50) return 45    */
+
+
+function randomBetween(num1: number, num2: number) {
+  return Math.floor(Math.random() * (num1 - num2 + 1) + num2)
+}
+
+console.log(randomBetween(30, 50))
+
+
+
+
+
 /*   ZA-TASK:
 
 Shunday function yozing, u array ichidagi objectlarni “age” qiymati boyicha sortlab bersin.
 MASALAN: sortByAge([{age:23}, {age:21}, {age:13}]) return [{age:13}, {age:21}, {age:23}]  */
 
-type Age = {
-  age: number;
-};
+// type Age = {
+//   age: number;
+// };
 
-function sortByAge(arr: Age[]): Age[] {
-  return arr.sort((a, b) => a.age - b.age);
-}
+// function sortByAge(arr: Age[]): Age[] {
+//   return arr.sort((a, b) => a.age - b.age);
+// }
 
-console.log(sortByAge([{ age: 23 }, { age: 21 }, { age: 13 }]));
-
-
+// console.log(sortByAge([{ age: 23 }, { age: 21 }, { age: 13 }]));
 
 
 

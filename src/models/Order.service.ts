@@ -55,6 +55,7 @@ class OrderService {
       return "INSERTED";
     });
     console.log("promisedList:", promisedList);
+
     const OrderItemState = await Promise.all(promisedList);
     console.log("OrderItemState:", OrderItemState)
   }

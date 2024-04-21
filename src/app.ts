@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from 'express';
 import path from 'path';
 import router from './router';
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));  // public ni static fo
 app.use("/uploads", express.static("./uploads"));
 app.use(express.urlencoded({ extended: true })); // (traditional requestlarni qabul qilish uchun) parse incoming URL-encoded form data from the request body. { extended: true }: nested objects and arrays to be encoded in the URL.
 app.use(express.json()); // built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());// (request dagi cookies larni parse qilish uchun)
 app.use(morgan(MORGAN_FORMAT)); // log information about incoming requests, including details like request method, URL, status code, response time, and more.
 

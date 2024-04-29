@@ -1,25 +1,50 @@
+
+/* ZF-TASK:
+
+Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
+MASALAN: capitalizeWords('name should be a string') return 'Name Should be a String'  */
+
+
+function capitalizeWords(text: string): string {
+  return text
+    .toLowerCase()
+    .split(" ")
+    .map(word => {
+      if (word.length <= 2) {
+        return word;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+
+console.log("test:", capitalizeWords('name should be a string'))
+
+
+
+
 /* ZE-TASK:
 
 Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
 MASALAN: removeDuplicate('stringg') return 'string' */
 
 
-function removeDuplicate(str: string) {
-  let count = 0;
-  let strArray = str.split("");
-  for (let i = 0; i < strArray.length; i++) {
-    for (let j = i + 1; j < strArray.length; j++) {
-      if (strArray[i] == strArray[j]) {
-        strArray.splice(j, 1)
-        count++;
-        break;
-      }
-    }
-  }
-  return strArray
-}
+// function removeDuplicate(str: string) {
+//   let count = 0;
+//   let strArray = str.split("");
+//   for (let i = 0; i < strArray.length; i++) {
+//     for (let j = i + 1; j < strArray.length; j++) {
+//       if (strArray[i] == strArray[j]) {
+//         strArray.splice(j, 1)
+//         count++;
+//         break;
+//       }
+//     }
+//   }
+//   return strArray
+// }
 
-console.log(removeDuplicate("heeloo"))
+// console.log(removeDuplicate("heeloo"))
 
 
 /* ZD-TASK:

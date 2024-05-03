@@ -1,29 +1,42 @@
+/* ZH-TASK:
+
+Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni bir arrayda qaytarsin. 
+MASALAN: findDisappearedNumbers([1, 3, 4, 7]) return [2, 5, 6] */
+
+function findDisappearedNumbers(arr: number[]) {
+  let newArr = [];
+  const minNumber = Math.min(...arr);
+  const maxNumber = Math.max(...arr);
+
+  for (let i = minNumber; i < maxNumber; i++) {
+    if (!arr.includes(i + 1)) {
+      newArr.push(i + 1);
+    }
+  }
+  console.log(newArr);
+}
+
+findDisappearedNumbers([1, 3, 4, 7]);
+
 /*  ZG-TASK:
 
 Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin. 
 MASALAN: capitalizeWords('name should be a string') return 'name_should_be_a_string' */
 
-
-function capitalizeWords(str: string) {
-  let words = str.split(" ");
-  let capitalize = words.map(function (word) {
-    return word.charAt(0).toLowerCase() + word.slice(1);
-  });
-  return capitalize.join("_");
-}
-const result = capitalizeWords("name should be a string");
-console.log("result:", result);
-
-
-
-
-
+// function capitalizeWords(str: string) {
+//   let words = str.split(" ");
+//   let capitalize = words.map(function (word) {
+//     return word.charAt(0).toLowerCase() + word.slice(1);
+//   });
+//   return capitalize.join("_");
+// }
+// const result = capitalizeWords("name should be a string");
+// console.log("result:", result);
 
 /* ZF-TASK:
 
 Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
 MASALAN: capitalizeWords('name should be a string') return 'Name Should be a String'  */
-
 
 // function capitalizeWords(text: string): string {
 //   return text
@@ -40,14 +53,10 @@ MASALAN: capitalizeWords('name should be a string') return 'Name Should be a Str
 
 // console.log("test:", capitalizeWords('name should be a string'))
 
-
-
-
 /* ZE-TASK:
 
 Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
 MASALAN: removeDuplicate('stringg') return 'string' */
-
 
 // function removeDuplicate(str: string) {
 //   let count = 0;
@@ -66,12 +75,10 @@ MASALAN: removeDuplicate('stringg') return 'string' */
 
 // console.log(removeDuplicate("heeloo"))
 
-
 /* ZD-TASK:
 
 Shunday function yozing, uni number, array va number parametrlari bolsin va berilgan 1-parametr numberga teng indexni array ichidan topib 3-parametrdagi raqam bilan almashtirib yangilangan arrayni qaytarsin
 MASALAN: changeNumberInArray(1, [1,3,7,2], 2) return [1,2,7,2]   */
-
 
 // function changeNumberInArray(num1: number, arr: number[], num2: number) {
 //   arr[num1] = num2;
@@ -79,9 +86,6 @@ MASALAN: changeNumberInArray(1, [1,3,7,2], 2) return [1,2,7,2]   */
 // }
 
 // console.log(changeNumberInArray(1, [1, 3, 7, 2], 2))
-
-
-
 
 /* ZC-TASK:
 
@@ -96,25 +100,16 @@ MASALAN: celsiusToFahrenheit(0) return 32
 
 // console.log(celsiusToFahrenheit(200))
 
-
-
-
-
 /*  ZB-TASK:
 
 Shunday function yozing, uni 2 ta number parametri bolsin va berilgan sonlar orasidan random raqam return qilsin
 MASALAN: randomBetween(30, 50) return 45    */
-
 
 // function randomBetween(num1: number, num2: number) {
 //   return Math.floor(Math.random() * (num1 - num2 + 1) + num2)
 // }
 
 // console.log(randomBetween(30, 50))
-
-
-
-
 
 /*   ZA-TASK:
 
@@ -131,13 +126,6 @@ MASALAN: sortByAge([{age:23}, {age:21}, {age:13}]) return [{age:13}, {age:21}, {
 
 // console.log(sortByAge([{ age: 23 }, { age: 21 }, { age: 13 }]));
 
-
-
-
-
-
-
-
 /*  Z-TASK:
 
 Shunday function yozing, u sonlardan tashkil topgan array qabul qilsin. Function arraydagi juft sonlarni yigindisini qaytarsin
@@ -150,17 +138,11 @@ MASALAN: sumEvens([1,2,3]) return 2
 // const result = sumEvens([1, 2, 3, 4, 5])
 // console.log(result)
 
-
-
-
-
-
 /*  Y-TASK:
 
  Shunday function yozing, uni 2 ta array parametri bolsin. Function ikkala arrayda ham ishtirok etgan qiymatlarni bir arrayda qaytarsin
  MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
 */
-
 
 // function findIntersection(arr1: any[], arr2: any[]): any[] {
 //   const sameElements = arr1.filter(element => arr2.includes(element));
@@ -173,10 +155,6 @@ MASALAN: sumEvens([1,2,3]) return 2
 
 // console.log(result);
 
-
-
-
-
 /* X-TASK:
 
 Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
@@ -184,7 +162,6 @@ Shunday function yozing, uni object va string parapetrlari bolsin. Function stri
 MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2  */
 
 // if (typeof obj[key] === 'string' && obj[key].includes(target)) {
-
 
 // function countOccurrences(obj: object | any, key: any) {
 //   let count = 0;
@@ -205,11 +182,6 @@ MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}
 
 // countOccurrences({ model: 'Bugatti', steer: { model: 'HANKOOK', size: 30 } }, 'model')
 
-
-
-
-
-
 /* W-TASK:
 
 Shunday function yozing, uni array va number parametrlari bolsin. Function arrayni numberda berilgan uzunlikda kesib bolaklarga ajratilgan array holatida qaytarsin
@@ -228,7 +200,6 @@ MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9]
 
 // const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
 // console.log(result);
-
 
 // 2-variant of W-task
 
@@ -250,9 +221,6 @@ MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9]
 
 // chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3)
 
-
-
-
 // const numbers = [5, 6, 9, 2, 4, 7];
 // // reduce - qisqartirish
 // const result = numbers.reduce((total, curValue, curIndex) => {
@@ -262,20 +230,11 @@ MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9]
 // }, 0);    // 0 buyerda initial value.
 // console.log("reduce method's result:", result);
 
-
-
-
-
-
-
-
-
 /* V-TASK:
 
 Shunday function yozing, uni string parametri bolsin va stringdagi harf va u harf necha marta takrorlangani sonidan tashkil topgan object qaytarsin.
 MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 */
-
 
 // function countChars(word: string) {
 //   const countLetter: any = {};
@@ -291,15 +250,6 @@ MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 //   return countLetter;
 // }
 // console.log(countChars("hello"))
-
-
-
-
-
-
-
-
-
 
 // U-TASK:
 
@@ -318,24 +268,9 @@ MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 // console.log(summOdds(9))
 // console.log(summOdds(11))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // T - TASK
 // Shunday function yozing, u sonlardan tashkil topgan 2 ta array qabul qilsin va ikkala arraydagi sonlarni tartiblab bir arrayda qaytarsin
 // MASALAN: mergeSortedArrays([0,3,4,31], [4,6,30]); return [0,3,4,4,6,30,31]
-
 
 // function mergeSortedArrays(arr1: number[], arr2: number[]) {
 //   let newArray: number[] = [];
@@ -370,8 +305,6 @@ MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}
 
 // console.log(mergeSortedArrays(arr1, arr2));
 
-
-
 /** S-TASK:
 
 Shunday function yozing, u numberlardan tashkil topgan array qabul qilsin va osha numberlar orasidagi tushib qolgan sonni topib uni return qilsin
@@ -392,15 +325,7 @@ MASALAN: missingNumber([3, 0, 1]) return 2
 //   }
 // }
 
-
 // missingNumber([3, 2, 1, 0, 5, 6])
-
-
-
-
-
-
-
 
 /* R-TASK:
 
@@ -416,10 +341,7 @@ MASALAN: calculate("1+3") return 4;
 //   return console.log(result)
 // }
 
-
 // calculate("7+9")
-
-
 
 /* Q-TASK:
 
@@ -436,11 +358,6 @@ MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProper
 
 // console.log(hasProperty({ name: "BMW", model: "M3" }, "model"))
 // console.log(hasProperty({ name: "BMW", model: "M3" }, "year"))
-
-
-
-
-
 
 /*
 P - TASK:
@@ -464,8 +381,6 @@ MASALAN: objectToArray( {a: 10, b: 20}) return [['a', 10], ['b', 20]]
 // const result = objectToArray(obj);
 // console.log("result:", result);
 
-
-
 //////////////////////////////////////////////////////////////////////////
 
 /* O-TASK:
@@ -485,7 +400,6 @@ MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]) return 45
 
 // console.log(calculateSumOfNumbers([10, "10", 3, { son: 10 }, null, "8", true, 35]))
 
-
 //////////////////////////////////////////////////////////////////////////
 
 /* N-TASK:
@@ -502,7 +416,6 @@ MASALAN: palindromCheck("dad") return true;  palindromCheck("son") return false;
 // console.log(palindromCheck("dad"))
 // console.log(palindromCheck("son"))
 
-
 //////////////////////////////////////////////////////////////////////////
 
 /* M-TASK:
@@ -518,7 +431,6 @@ MASALAN: getSquareNumbers([1, 2, 3]) return [{number: 1, square: 1}, {number: 2,
 // const result = getSquareNumbers([1, 2, 3]);
 // console.log(result);
 // console.log("typeof result:", typeof result)
-
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -541,11 +453,6 @@ MASALAN: reverseSentence("we like coding!") return "ew ekil gnidoc"; */
 
 // console.log(reverseSentence("we like coding!?"))
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////
 
 /* K-TASK:
@@ -559,7 +466,6 @@ MASALAN: countVowels("string") return 1;  */
 // }
 // const result = countVowel('Assalom-alekum');
 // console.log(result?.length);
-
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -581,8 +487,6 @@ MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"  */
 
 // console.log(findLongestWord("Welcome to Uzbekistan"))
 
-
-
 //////////////////////////////////////////////////////////////////////////
 
 /*  I-TASK:
@@ -597,8 +501,6 @@ MASALAN: getDigits("m14i1t") return qiladi "141" */
 // console.log(getDigit('0s2fd51w'))
 
 // console.log(typeof (getDigit('0s2fd51w')))  // for testing
-
-
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -617,9 +519,7 @@ MASALAN: getPositive([1, -4, 2]) return qiladi "12"  */
 
 // getPositive([1, -8, 3, 0, -19, 2, -34, 55, 7])
 
-
 ///////////////////////////////////////////////////////////////////////////
-
 
 /* Project standarts
 - Logging standards
@@ -638,18 +538,12 @@ Eng ko'p ishlatiladigan API lar:
   - GraphQL Api
 */
 
-
 ///////////////////////////////////////////////////////////////////////////
-
-
-
 
 /* G-TASK:
 
 Shunday function tuzingki unga integerlardan iborat array pass bolsin va function bizga osha arrayning eng katta qiymatiga tegishli birinchi indexni qaytarsin.
 MASALAN: getHighestIndex([5, 21, 12, 21, 8]) return qiladi 1 sonini */
-
-
 
 // function getHighestIndex(arr: Array<number>) {
 //   let newArr = [...arr]

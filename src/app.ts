@@ -32,7 +32,7 @@ app.use( // They can handle requests, modify the request or response objects, an
   session({
     secret: String(process.env.SESSION_SECRET), // .env dagi SESSION_SECRET
     cookie: {
-      maxAge: 1000 * 60 * 30 // 30minutes => yashash muddati
+      maxAge: 1000 * 60 * 100 // 30minutes => yashash muddati
     },
     store: store,  // yuqorida ko'rsatilgan MongoDBStore ni takidlab ketyapmiz.
     // Boilerplate options, see:

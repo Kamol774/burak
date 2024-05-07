@@ -1,22 +1,39 @@
+/* ZJ-TASK:
+
+Shunday function yozing, u berilgan arrayni ichidagi numberlarni qiymatini hisoblab qaytarsin.
+MASALAN: reduceNestedArray([1, [1, 2, [4]]]) return 8  */
+
+function reduceNestedArray(arr: any[]): number {
+  return arr.reduce((sum, element) => {
+    if (Array.isArray(element)) {
+      return sum + reduceNestedArray(element);
+    } else {
+      return sum + element;
+    }
+  }, 0);
+}
+const result = reduceNestedArray([1, [1, 2, [4]]]);
+console.log(result);
+
 /* ZH-TASK:
 
 Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni bir arrayda qaytarsin. 
 MASALAN: findDisappearedNumbers([1, 3, 4, 7]) return [2, 5, 6] */
 
-function findDisappearedNumbers(arr: number[]) {
-  let newArr = [];
-  const minNumber = Math.min(...arr);
-  const maxNumber = Math.max(...arr);
+// function findDisappearedNumbers(arr: number[]) {
+//   let newArr = [];
+//   const minNumber = Math.min(...arr);
+//   const maxNumber = Math.max(...arr);
 
-  for (let i = minNumber; i < maxNumber; i++) {
-    if (!arr.includes(i + 1)) {
-      newArr.push(i + 1);
-    }
-  }
-  console.log(newArr);
-}
+//   for (let i = minNumber; i < maxNumber; i++) {
+//     if (!arr.includes(i + 1)) {
+//       newArr.push(i + 1);
+//     }
+//   }
+//   console.log(newArr);
+// }
 
-findDisappearedNumbers([1, 3, 4, 7]);
+// findDisappearedNumbers([1, 3, 4, 7]);
 
 /*  ZG-TASK:
 

@@ -1,13 +1,27 @@
+/* ZM-TASK:
+
+Shunday function yozing, u function parametrga berilgan raqamlarni orqasiga ogirib qaytarsin.
+MASALAN: reverseInteger(123456789) return 987654321  */
+
+function reverseInteger(num: Number) {
+  const arr = num.toString().split("").reverse().join("");
+  const result = parseInt(arr);
+  console.log("result:", result);
+  console.log("type:", typeof result);
+}
+
+reverseInteger(5456153);
+
 /* ZL-TASK:
 
 Shunday function yozing, u parametrda berilgan stringni kebab casega otkazib qaytarsin. Bosh harflarni kichik harflarga ham otkazsin.
 MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab”  */
 
-function stringToKebab(text: string) {
-  console.log(text.toLowerCase().replace(/ /g, "-"));
-}
+// function stringToKebab(text: string) {
+//   console.log(text.toLowerCase().replace(/ /g, "-"));
+// }
 
-stringToKebab("I love Kebab");
+// stringToKebab("I love Kebab");
 
 /*  ZK-TASK:
 

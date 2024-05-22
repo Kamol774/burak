@@ -1,3 +1,27 @@
+/* ZP-TASK:
+
+Shunday function yozing, u parametridagi array ichida eng kop takrorlangan raqamni topib qaytarsin.
+MASALAN: majorityElement([1,2,3,4,5,4,3,4]) return 4
+ */
+
+function majorityElement(arr: number[]) {
+  const frequencyMap: Record<number, number> = {};
+  let maxFrequency = 0;
+  let mostRepeatedNum = arr[0];
+
+  for (const num of arr) {
+    frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+    if (frequencyMap[num] > maxFrequency) {
+      maxFrequency = frequencyMap[num];
+      mostRepeatedNum = num;
+    }
+  }
+
+  return mostRepeatedNum;
+}
+
+console.log(majorityElement([1, 3, 3, 3, 2, 2, 1, 3, 4]));
+
 /*  ZO-TASK:
 
 Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
@@ -9,23 +33,23 @@ MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return 
 
 // areParenthesesBalanced("string()ichida(qavslar)soni()balansda");
 
-function areParenthesesBalanced(sentence: string): boolean {
-  let count = 0;
+// function areParenthesesBalanced(sentence: string): boolean {
+//   let count = 0;
 
-  for (const char of sentence) {
-    if (char === "(") {
-      count++;
-    } else if (char === ")") {
-      count--;
-      if (count < 0) {
-        return false;
-      }
-    }
-  }
-  return count === 0;
-}
+//   for (const char of sentence) {
+//     if (char === "(") {
+//       count++;
+//     } else if (char === ")") {
+//       count--;
+//       if (count < 0) {
+//         return false;
+//       }
+//     }
+//   }
+//   return count === 0;
+// }
 
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
+// console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
 
 /* ZN-TASK:
 

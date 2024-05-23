@@ -1,26 +1,49 @@
+/*  ZQ-TASK:
+
+Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida arrayda qaytarsin.
+MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4]  */
+
+function findDuplicates(arr: number[]): number[] {
+  const duplicates: number[] = [];
+  const count: { [key: number]: number } = {};
+
+  for (const num of arr) {
+    count[num] = (count[num] || 0) + 1;
+  }
+
+  for (const num in count) {
+    if (count[num] === 2) {
+      duplicates.push(Number(num));
+    }
+  }
+
+  return duplicates;
+}
+console.log(findDuplicates([1, 2, 3, 4, 5, 3, 4]));
+
 /* ZP-TASK:
 
 Shunday function yozing, u parametridagi array ichida eng kop takrorlangan raqamni topib qaytarsin.
 MASALAN: majorityElement([1,2,3,4,5,4,3,4]) return 4
  */
 
-function majorityElement(arr: number[]) {
-  const frequencyMap: Record<number, number> = {};
-  let maxFrequency = 0;
-  let mostRepeatedNum = arr[0];
+// function majorityElement(arr: number[]) {
+//   const frequencyMap: Record<number, number> = {};
+//   let maxFrequency = 0;
+//   let mostRepeatedNum = arr[0];
 
-  for (const num of arr) {
-    frequencyMap[num] = (frequencyMap[num] || 0) + 1;
-    if (frequencyMap[num] > maxFrequency) {
-      maxFrequency = frequencyMap[num];
-      mostRepeatedNum = num;
-    }
-  }
+//   for (const num of arr) {
+//     frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+//     if (frequencyMap[num] > maxFrequency) {
+//       maxFrequency = frequencyMap[num];
+//       mostRepeatedNum = num;
+//     }
+//   }
 
-  return mostRepeatedNum;
-}
+//   return mostRepeatedNum;
+// }
 
-console.log(majorityElement([1, 3, 3, 3, 2, 2, 1, 3, 4]));
+// console.log(majorityElement([1, 3, 3, 3, 2, 2, 1, 3, 4]));
 
 /*  ZO-TASK:
 

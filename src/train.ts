@@ -1,25 +1,50 @@
+/* ZR-TASK:
+
+Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
+
+function countNumberAndLetters(input: string): {
+  letters: number;
+  numbers: number;
+} {
+  let letterCount = 0;
+  let numberCount = 0;
+
+  for (const i of input) {
+    if (/[a-zA-Z]/.test(i)) {
+      letterCount++;
+    } else if (/[0-9]/.test(i)) {
+      numberCount++;
+    }
+  }
+
+  return { letters: letterCount, numbers: numberCount };
+}
+const result = countNumberAndLetters("string152%¥");
+console.log(`{numbers: ${result.numbers}, letters: ${result.letters}}`);
+
 /*  ZQ-TASK:
 
 Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida arrayda qaytarsin.
 MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4]  */
 
-function findDuplicates(arr: number[]): number[] {
-  const duplicates: number[] = [];
-  const count: { [key: number]: number } = {};
+// function findDuplicates(arr: number[]): number[] {
+//   const duplicates: number[] = [];
+//   const count: { [key: number]: number } = {};
 
-  for (const num of arr) {
-    count[num] = (count[num] || 0) + 1;
-  }
+//   for (const num of arr) {
+//     count[num] = (count[num] || 0) + 1;
+//   }
 
-  for (const num in count) {
-    if (count[num] === 2) {
-      duplicates.push(Number(num));
-    }
-  }
+//   for (const num in count) {
+//     if (count[num] === 2) {
+//       duplicates.push(Number(num));
+//     }
+//   }
 
-  return duplicates;
-}
-console.log(findDuplicates([1, 2, 3, 4, 5, 3, 4]));
+//   return duplicates;
+// }
+// console.log(findDuplicates([1, 2, 3, 4, 5, 3, 4]));
 
 /* ZP-TASK:
 

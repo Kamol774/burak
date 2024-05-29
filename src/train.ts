@@ -1,27 +1,44 @@
+/* ZS-TASK:
+
+Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin.
+MASALAN: singleNumber([4, 2, 1, 2, 1]) return 4    */
+
+function singleNumber(arr: number[]): number[] {
+  const frequencyMap: Record<number, number> = {};
+
+  for (const num of arr) {
+    frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+  }
+
+  return arr.filter((num) => frequencyMap[num] === 1);
+}
+
+console.log(singleNumber([4, 2, 1, 2, 1]));
+
 /* ZR-TASK:
 
 Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
 MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6} */
 
-function countNumberAndLetters(input: string): {
-  letters: number;
-  numbers: number;
-} {
-  let letterCount = 0;
-  let numberCount = 0;
+// function countNumberAndLetters(input: string): {
+//   letters: number;
+//   numbers: number;
+// } {
+//   let letterCount = 0;
+//   let numberCount = 0;
 
-  for (const i of input) {
-    if (/[a-zA-Z]/.test(i)) {
-      letterCount++;
-    } else if (/[0-9]/.test(i)) {
-      numberCount++;
-    }
-  }
+//   for (const i of input) {
+//     if (/[a-zA-Z]/.test(i)) {
+//       letterCount++;
+//     } else if (/[0-9]/.test(i)) {
+//       numberCount++;
+//     }
+//   }
 
-  return { letters: letterCount, numbers: numberCount };
-}
-const result = countNumberAndLetters("string152%¥");
-console.log(`{numbers: ${result.numbers}, letters: ${result.letters}}`);
+//   return { letters: letterCount, numbers: numberCount };
+// }
+// const result = countNumberAndLetters("string152%¥");
+// console.log(`{numbers: ${result.numbers}, letters: ${result.letters}}`);
 
 /*  ZQ-TASK:
 

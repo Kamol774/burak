@@ -1,19 +1,43 @@
+/* ZT-TASK:
+
+Shunday function yozing, u parametridagi string ichida 1 martadan ortiq qaytarilmagan birinchi harf indeksini qaytarsin.
+MASALAN: firstUniqueCharIndex(“stamp”) return 0  */
+
+function firstUniqueCharIndex(input: string): number {
+  const charCount: Record<string, number> = {};
+
+  for (const char of input) {
+    charCount[char] = (charCount[char] || 0) + 1;
+  }
+
+  for (let i = 0; i < input.length; i++) {
+    if (charCount[input[i]] === 1) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+const index = firstUniqueCharIndex("stamp");
+console.log(index);
+
 /* ZS-TASK:
 
 Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin.
 MASALAN: singleNumber([4, 2, 1, 2, 1]) return 4    */
 
-function singleNumber(arr: number[]): number[] {
-  const frequencyMap: Record<number, number> = {};
+// function singleNumber(arr: number[]): number[] {
+//   const frequencyMap: Record<number, number> = {};
 
-  for (const num of arr) {
-    frequencyMap[num] = (frequencyMap[num] || 0) + 1;
-  }
+//   for (const num of arr) {
+//     frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+//   }
 
-  return arr.filter((num) => frequencyMap[num] === 1);
-}
+//   return arr.filter((num) => frequencyMap[num] === 1);
+// }
 
-console.log(singleNumber([4, 2, 1, 2, 1]));
+// console.log(singleNumber([4, 2, 1, 2, 1]));
 
 /* ZR-TASK:
 

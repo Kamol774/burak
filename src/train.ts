@@ -1,26 +1,50 @@
+/* ZU-TASK:
+
+Shunday function yozing, u parametridagi array ichida takrorlanmagan raqamlar yig'indisini qaytarsin.
+MASALAN: sumOfUnique([1,2,3,2]) return 4
+ */
+function sumOfUnique(nums: number[]): number {
+  const numCount = new Map<number, number>();
+
+  for (const num of nums) {
+    numCount.set(num, (numCount.get(num) || 0) + 1);
+  }
+
+  let sum = 0;
+  for (const [num, count] of numCount) {
+    if (count === 1) {
+      sum += num;
+    }
+  }
+
+  return sum;
+}
+
+console.log(sumOfUnique([1, 2, 3, 2]));
+
 /* ZT-TASK:
 
 Shunday function yozing, u parametridagi string ichida 1 martadan ortiq qaytarilmagan birinchi harf indeksini qaytarsin.
 MASALAN: firstUniqueCharIndex(“stamp”) return 0  */
 
-function firstUniqueCharIndex(input: string): number {
-  const charCount: Record<string, number> = {};
+// function firstUniqueCharIndex(input: string): number {
+//   const charCount: Record<string, number> = {};
 
-  for (const char of input) {
-    charCount[char] = (charCount[char] || 0) + 1;
-  }
+//   for (const char of input) {
+//     charCount[char] = (charCount[char] || 0) + 1;
+//   }
 
-  for (let i = 0; i < input.length; i++) {
-    if (charCount[input[i]] === 1) {
-      return i;
-    }
-  }
+//   for (let i = 0; i < input.length; i++) {
+//     if (charCount[input[i]] === 1) {
+//       return i;
+//     }
+//   }
 
-  return -1;
-}
+//   return -1;
+// }
 
-const index = firstUniqueCharIndex("stamp");
-console.log(index);
+// const index = firstUniqueCharIndex("stamp");
+// console.log(index);
 
 /* ZS-TASK:
 

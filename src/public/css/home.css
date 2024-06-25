@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(-45deg, #110303f0, #dd6d04, #011c1afc, #7a6868);
+  background: linear-gradient(-45deg, #67ee52, #a83ce7, #d56d23, #23ccd5);
 }
 
 .home-container a {
@@ -64,4 +64,19 @@
   .sphere path {
     stroke-width: 0.4px;
   }
+}
+
+/* ****************************************************************** */
+.container {
+  margin-top: 300px;
+  width: 100vw;
+  height: 100vV;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+svg {
+  fill: #fff;
+  width: 70%;
 }

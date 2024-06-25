@@ -3,7 +3,7 @@ import {
   ProductSize,
   ProductStatus,
   ProductVolume,
-  ProductCollection
+  ProductCollection,
 } from "../libs/enum/product.enum";
 
 const productSchema = new Schema(
@@ -61,11 +61,12 @@ const productSchema = new Schema(
       default: 0,
     },
   },
-  { timestamps: true } // updatedAt, createdAt  
+  { timestamps: true } // updatedAt, createdAt
 );
 
 // 1ta productdan faqat 1 barta kiritilishini taminlaymiz
-productSchema.index({ productName: 1, productSize: 1, ProductVolume: 1 },
+productSchema.index(
+  { productName: 1, productSize: 1, ProductVolume: 1 },
   { unique: true }
 );
-export default mongoose.model('Product', productSchema);
+export default mongoose.model("Product", productSchema);

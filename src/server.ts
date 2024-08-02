@@ -12,7 +12,9 @@
 // Cluster => Database => Collection => Document => Dataset
 
 import dotenv from "dotenv"; // hardoim dotenv yuqorida(birinchida) turishi shart
-dotenv.config();
+dotenv.config({
+  path: process.env.NODE_ENV === "production " ? ".env.production" : ".env",
+});
 
 import mongoose from "mongoose";
 import server from "./app";

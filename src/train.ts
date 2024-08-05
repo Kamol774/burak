@@ -1,26 +1,67 @@
+/* 
+PM2 COMMANDS:
+
+pm2 ls
+pm2 start dist/server.js --name=Kashtan
+pm2 start "npm run start:prod" --name=Kashtan
+for burak-react:    pm2 start yarn  --name "Kashtan-React" -- run "start:prod"
+pm2 stop id
+pm2 delete id  (delete qilishdan oldin albatta stop qilish shart)
+pm2 restart id
+pm2 monit
+pm2 kill
+*/
+
+// @ECHO off
+// GOTO start
+// :find_dp0
+// SET dp0=%~dp0
+// EXIT /b
+// :start
+// SETLOCAL
+// CALL :find_dp0
+
+// IF EXIST "%dp0%\node.exe" (
+//   SET "_prog=%dp0%\node.exe"
+// ) ELSE (
+//   SET "_prog=node"
+//   SET PATHEXT=%PATHEXT:;.JS;=;%
+// )
+
+// endLocal & goto #_undefined_# 2>NUL || title %COMSPEC% & "%_prog%"  "%dp0%\node_modules\yarn\bin\yarn.js" %*
+
+/* ***************************** 
+  
+"@toolpad/studio": "^0.1.53",
+"@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+
+*/
+
 /* ZU-TASK:
 
 Shunday function yozing, u parametridagi array ichida takrorlanmagan raqamlar yig'indisini qaytarsin.
 MASALAN: sumOfUnique([1,2,3,2]) return 4
  */
-function sumOfUnique(nums: number[]): number {
-  const numCount = new Map<number, number>();
+// function sumOfUnique(nums: number[]): number {
+//   const numCount = new Map<number, number>();
 
-  for (const num of nums) {
-    numCount.set(num, (numCount.get(num) || 0) + 1);
-  }
+//   for (const num of nums) {
+//     numCount.set(num, (numCount.get(num) || 0) + 1);
+//   }
 
-  let sum = 0;
-  for (const [num, count] of numCount) {
-    if (count === 1) {
-      sum += num;
-    }
-  }
+//   let sum = 0;
+//   for (const [num, count] of numCount) {
+//     if (count === 1) {
+//       sum += num;
+//     }
+//   }
 
-  return sum;
-}
+//   return sum;
+// }
 
-console.log(sumOfUnique([1, 2, 3, 2]));
+// console.log(sumOfUnique([1, 2, 3, 2]));
 
 /* ZT-TASK:
 
